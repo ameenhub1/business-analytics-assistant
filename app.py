@@ -160,6 +160,31 @@ div[data-testid="stSubheader"] h2 {
     margin-top: 6px;
 }
 
+/* Section headings */
+div[data-testid="stHeading"] h2,
+div[data-testid="stHeading"] h3 {
+    color: #0F172A !important;
+    font-weight: 700 !important;
+}
+
+/* Fallback for Streamlit heading containers */
+div[data-testid="stMarkdownContainer"] h2,
+div[data-testid="stMarkdownContainer"] h3 {
+    color: #0F172A !important;
+    font-weight: 700 !important;
+}
+
+/* Navigation tabs */
+button[data-baseweb="tab"] {
+    color: #334155 !important;
+    font-weight: 600 !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #1D4ED8 !important;
+    font-weight: 700 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -336,7 +361,7 @@ with tab1:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("📦 Category Performance")
+    st.subheader("Category Performance")
 
     category_display = analytics["category_stats"].copy()
 
@@ -359,7 +384,7 @@ with col1:
     )
 
 with col2:
-    st.subheader("🌎 Regional Performance")
+    st.subheader("Regional Performance")
 
     region_display = analytics["region_stats"].copy()
 
