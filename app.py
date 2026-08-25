@@ -369,54 +369,58 @@ with tab1:
     col5.metric("Avg Order Value", f"₹{analytics['avg_order_val']:,.0f}")
 
     st.divider()
-   # CATEGORY AND REGIONAL PERFORMANCE
-col1, col2 = st.columns(2)
+          # CATEGORY AND REGIONAL PERFORMANCE
+    col1, col2 = st.columns(2)
 
-with col1:
-    st.subheader("Category Performance")
+    with col1:
+        st.subheader("Category Performance")
 
-    category_display = analytics["category_stats"].copy()
+        category_display = analytics["category_stats"].copy()
+        category_display = category_display.reset_index()
+        category_display = category_display.rename(columns={"index": "Category"})
 
-    category_display["Revenue"] = category_display["Revenue"].map(
-        lambda x: f"₹{x:,.0f}"
-    )
+        category_display["Revenue"] = category_display["Revenue"].map(
+            lambda x: f"₹{x:,.0f}"
+        )
 
-    category_display["Profit"] = category_display["Profit"].map(
-        lambda x: f"₹{x:,.0f}"
-    )
+        category_display["Profit"] = category_display["Profit"].map(
+            lambda x: f"₹{x:,.0f}"
+        )
 
-    category_display["Margin %"] = category_display["Margin %"].map(
-        lambda x: f"{x:.1f}%"
-    )
+        category_display["Margin %"] = category_display["Margin %"].map(
+            lambda x: f"{x:.1f}%"
+        )
 
-    st.dataframe(
-        category_display,
-        use_container_width=True,
-        hide_index=True
-    )
+        st.dataframe(
+            category_display,
+            use_container_width=True,
+            hide_index=True
+        )
 
-with col2:
-    st.subheader("Regional Performance")
+    with col2:
+        st.subheader("Regional Performance")
 
-    region_display = analytics["region_stats"].copy()
+        region_display = analytics["region_stats"].copy()
+        region_display = region_display.reset_index()
+        region_display = region_display.rename(columns={"index": "Region"})
 
-    region_display["Revenue"] = region_display["Revenue"].map(
-        lambda x: f"₹{x:,.0f}"
-    )
+        region_display["Revenue"] = region_display["Revenue"].map(
+            lambda x: f"₹{x:,.0f}"
+        )
 
-    region_display["Profit"] = region_display["Profit"].map(
-        lambda x: f"₹{x:,.0f}"
-    )
+        region_display["Profit"] = region_display["Profit"].map(
+            lambda x: f"₹{x:,.0f}"
+        )
 
-    region_display["Margin %"] = region_display["Margin %"].map(
-        lambda x: f"{x:.1f}%"
-    )
+        region_display["Margin %"] = region_display["Margin %"].map(
+            lambda x: f"{x:.1f}%"
+        )
 
-    st.dataframe(
-        region_display,
-        use_container_width=True,
-        hide_index=True
-    )
+        st.dataframe(
+            region_display,
+            use_container_width=True,
+            hide_index=True
+        )
 # TAB 2 - VISUAL ANALYTICS
 with tab2:
     col1, col2 = st.columns(2)
