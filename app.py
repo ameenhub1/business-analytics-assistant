@@ -433,7 +433,7 @@ with tab2:
             markers=True,
             color_discrete_sequence=["#2563EB"]
         )
-                fig1.update_layout(
+        fig1.update_layout(
             plot_bgcolor="white",
             paper_bgcolor="white",
 
