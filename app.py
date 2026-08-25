@@ -283,6 +283,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+     
+
 
 # TABS
 tab1, tab2, tab3, tab4 = st.tabs([
@@ -367,7 +369,7 @@ with tab2:
 
 # TAB 3 - ANOMALY REPORT
 with tab3:
-    st.subheader("⚠️ Anomaly Detection Report")
+    st.subheader("Anomaly Detection Report")
     anomaly_count = len(analytics["anomalies"])
     st.error(f"{anomaly_count} anomalies detected in sales data")
 
@@ -393,9 +395,9 @@ with tab3:
 
 # TAB 4 - ASK YOUR DATA
 with tab4:
-    st.subheader("🤖 Ask Your Data")
+    st.subheader("Ask Your Data")
 
-    if st.button("🔍 Generate Business Insights", type="primary"):
+    if st.button(" Generate Business Insights", type="primary"):
         with st.spinner("Analysing your data..."):
             insight = ask_ai(
                 "Give me the top 3 business insights with specific numbers and what the business should investigate.",
