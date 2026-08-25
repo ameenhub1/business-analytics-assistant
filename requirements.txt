@@ -1,6 +1,78 @@
-streamlit
-pandas
-numpy
-plotly
-google-genai
-openpyxl
+# 📊 Business Analytics Assistant
+### AI-powered sales analysis and business insights
+
+🔗 **[Live Demo](https://business-analytics-assistant-jf82lhqkyowcrbfqjahc9x.streamlit.app/)**
+
+---
+
+## What it does
+
+Upload sales data and instantly get:
+- Executive KPI dashboard (Sales, Profit, Margin, Orders)
+- Interactive visualisations by Category, Region, and Customer Segment
+- Automatic anomaly detection across monthly sales trends
+- AI-generated business insights in plain English
+- Natural language Q&A — ask any business question about your data
+
+---
+
+## Demo
+
+**Ask Your Data examples:**
+- *"Which category generated the most revenue?"*
+- *"Why did sales drop in January 2024?"*
+- *"Which region has the lowest profit margin?"*
+- *"Give me the top 3 business insights."*
+
+---
+
+
+---
+
+## Tech Stack
+
+| Layer | Tools |
+|-------|-------|
+| Data Processing | Python, Pandas, NumPy |
+| Analysis | SQL-style aggregations, statistical anomaly detection |
+| Visualisation | Plotly |
+| AI Layer | Google Gemini API |
+| Dashboard | Streamlit |
+| Deployment | Streamlit Community Cloud |
+
+---
+
+## Key Features
+
+**🔍 Anomaly Detection**
+Flags months where regional sales deviate more than 1.5 standard deviations from the mean — automatically surfaces what needs investigation.
+
+**🤖 AI Insights Engine**
+Passes computed statistics (not raw data) to the LLM — ensuring accurate, grounded responses with real numbers from the analysis.
+
+**📈 Executive Dashboard**
+KPI cards, category performance, regional breakdown, and customer segment analysis — all interactive.
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/your-username/business-analytics-assistant
+cd business-analytics-assistant
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Add your Gemini API key in `.streamlit/secrets.toml`:
+```toml
+GEMINI_API_KEY = "your-key-here"
+```
+
+---
+
+## Author
+
+**Muhammed Ameen M P** — Data Analyst  
+[Portfolio](https://ameenhub1.github.io) | [LinkedIn](https://linkedin.com/in/your-profile) | [Email](mailto:careersameen@gmail.com)
+## Architecture
