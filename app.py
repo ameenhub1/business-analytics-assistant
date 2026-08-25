@@ -577,7 +577,58 @@ with tab2:
             color_continuous_scale="RdYlGn"
         )
         fig3.update_traces(texttemplate="₹%{text:,.0f}", textposition="outside")
-        fig3.update_layout(plot_bgcolor="white", paper_bgcolor="white")
+        fig3.update_layout(
+            plot_bgcolor="white",
+            paper_bgcolor="white",
+            font=dict(
+                family="Arial",
+                color="#334155"
+            ),
+            title_font=dict(
+                size=18,
+                color="#0F172A"
+            ),
+            margin=dict(
+                l=70,
+                r=30,
+                t=60,
+                b=60
+            ),
+            xaxis=dict(
+                showgrid=False,
+                linecolor="#94A3B8",
+                tickfont=dict(
+                    color="#334155",
+                    size=12
+                ),
+                title=dict(
+                    text="Region",
+                    font=dict(
+                        color="#334155",
+                        size=13
+                    )
+                )
+            ),
+            yaxis=dict(
+                gridcolor="#CBD5E1",
+                zeroline=False,
+                tickfont=dict(
+                    color="#334155",
+                    size=12
+                ),
+                title=dict(
+                    text="Revenue",
+                    font=dict(
+                        color="#334155",
+                        size=13
+                    )
+                )
+            ),
+            hoverlabel=dict(
+                bgcolor="white",
+                font_color="#0F172A"
+            )
+        )
         st.plotly_chart(fig3, use_container_width=True)
 
     with col4:
@@ -588,6 +639,34 @@ with tab2:
             names="Customer Segment",
             title="Sales by Customer Segment",
             color_discrete_sequence=["#2563EB", "#16A34A", "#DC2626"]
+        )
+        fig4.update_layout(
+            plot_bgcolor="white",
+            paper_bgcolor="white",
+            font=dict(
+                family="Arial",
+                color="#334155"
+            ),
+            title_font=dict(
+                size=18,
+                color="#0F172A"
+            ),
+            margin=dict(
+                l=30,
+                r=30,
+                t=60,
+                b=30
+            ),
+            legend=dict(
+                font=dict(
+                    color="#334155",
+                    size=12
+                )
+            ),
+            hoverlabel=dict(
+                bgcolor="white",
+                font_color="#0F172A"
+            )
         )
         st.plotly_chart(fig4, use_container_width=True)
 
