@@ -47,6 +47,15 @@ st.markdown("""
         color: #0F172A;
         font-weight: 650;
     }
+    /* Streamlit subheaders */
+div[data-testid="stSubheader"] {
+    color: #0F172A !important;
+}
+
+div[data-testid="stSubheader"] h2 {
+    color: #0F172A !important;
+    font-weight: 700 !important;
+}
 
     /* Normal text */
     p, label {
@@ -280,7 +289,7 @@ st.markdown(
     """
     <div class="hero-header">
         <div class="hero-label">BUSINESS INTELLIGENCE</div>
-        <div class="hero-title">📊 Business Analytics Assistant</div>
+        <div class="hero-title">Business Analytics Assistant</div>
         <div class="hero-subtitle">
             AI-powered sales analysis, anomaly detection and business insights
         </div>
