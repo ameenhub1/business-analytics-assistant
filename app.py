@@ -433,7 +433,7 @@ with tab2:
             markers=True,
             color_discrete_sequence=["#2563EB"]
         )
-                fig1.update_layout(
+        fig1.update_layout(
             plot_bgcolor="white",
             paper_bgcolor="white",
             font=dict(
@@ -464,8 +464,7 @@ with tab2:
                 font_color="#0F172A"
             )
         )
-
-        st.plotly_chart(fig1, use_container_width=True)
+       st.plotly_chart(fig1, use_container_width=True)
     
        
 
