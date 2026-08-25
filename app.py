@@ -185,6 +185,18 @@ button[data-baseweb="tab"][aria-selected="true"] {
     font-weight: 700 !important;
 }
 
+/* Navigation tabs */
+button[data-baseweb="tab"] {
+    color: #334155 !important;
+    font-weight: 600 !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #1D4ED8 !important;
+    font-weight: 700 !important;
+}
+
+
 </style>
 """, unsafe_allow_html=True)
 
