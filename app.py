@@ -205,7 +205,7 @@ div.questions-title {
 
 /* Generate Business Insights button */
 div.stButton > button[kind="primary"] {
-    background-color: #7C3AED !important;
+    background-color: #111827 !important;
     color: white !important;
     border: none !important;
     border-radius: 10px !important;
@@ -213,7 +213,7 @@ div.stButton > button[kind="primary"] {
 }
 
 div.stButton > button[kind="primary"]:hover {
-    background-color: #6D28D9 !important;
+    background-color: #000000  !important;
     color: white !important;
 }
 
