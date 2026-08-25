@@ -215,6 +215,10 @@ div.stButton > button[kind="primary"] {
 div.stButton > button[kind="primary"]:hover {
     background-color: #000000  !important;
     color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+
 }
 
 </style>
