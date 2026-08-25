@@ -196,6 +196,12 @@ button[data-baseweb="tab"][aria-selected="true"] {
     font-weight: 700 !important;
 }
 
+div.questions-title {
+    color: #2563EB !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin: 20px 0 14px 0;
+}
 
 </style>
 """, unsafe_allow_html=True)
