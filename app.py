@@ -433,32 +433,64 @@ with tab2:
             markers=True,
             color_discrete_sequence=["#2563EB"]
         )
-        fig1.update_layout(
+                fig1.update_layout(
             plot_bgcolor="white",
             paper_bgcolor="white",
+
             font=dict(
                 family="Arial",
                 color="#334155"
             ),
+
             title_font=dict(
                 size=18,
                 color="#0F172A"
             ),
+
             margin=dict(
-                l=20,
+                l=70,
                 r=20,
                 t=60,
-                b=20
+                b=70
             ),
+
             xaxis=dict(
                 showgrid=False,
-                linecolor="#CBD5E1",
-                tickangle=-45
+                linecolor="#94A3B8",
+                tickangle=-45,
+
+                tickfont=dict(
+                    color="#334155",
+                    size=12
+                ),
+
+                title=dict(
+                    text="Year-Month",
+                    font=dict(
+                        color="#334155",
+                        size=13
+                    )
+                )
             ),
+
             yaxis=dict(
-                gridcolor="#E2E8F0",
-                zeroline=False
+                gridcolor="#CBD5E1",
+                zeroline=False,
+
+                tickfont=dict(
+                    color="#334155",
+                    size=12
+                ),
+
+                title=dict(
+                    text="Sales",
+                    font=dict(
+                        color="#334155",
+                        size=13
+                    )
+                )
             ),
+
             hoverlabel=dict(
                 bgcolor="white",
                 font_color="#0F172A"
