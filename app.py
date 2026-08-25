@@ -254,6 +254,7 @@ st.markdown("""
     border-radius: 18px;
     margin-bottom: 24px;
 ">
+
     <div style="
         color: #93C5FD;
         font-size: 13px;
@@ -270,7 +271,7 @@ st.markdown("""
         font-weight: 750;
         margin-top: 6px;
     ">
-        📊 Business Analytics Assistant
+         Business Analytics Assistant
     </div>
 
     <div style="
@@ -280,6 +281,7 @@ st.markdown("""
     ">
         AI-powered sales analysis, anomaly detection and business insights
     </div>
+
 </div>
 """, unsafe_allow_html=True)
 
