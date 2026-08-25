@@ -16,6 +16,103 @@ st.set_page_config(
     layout="wide"
 )
 
+# ─────────────────────────────────────────────
+# PROFESSIONAL UI THEME
+# ─────────────────────────────────────────────
+
+st.markdown("""
+<style>
+
+    /* Main application background */
+    .stApp {
+        background-color: #F8FAFC;
+    }
+
+    /* Main content width */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        max-width: 1400px;
+    }
+
+    /* Main title */
+    h1 {
+        color: #0F172A;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    /* Section headings */
+    h2, h3 {
+        color: #0F172A;
+        font-weight: 650;
+    }
+
+    /* Normal text */
+    p, label {
+        color: #334155;
+    }
+
+    /* Tabs */
+    button[data-baseweb="tab"] {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    /* Tab underline */
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: #2563EB;
+    }
+
+    /* Streamlit metric cards */
+    div[data-testid="stMetric"] {
+        background-color: white;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    div[data-testid="stMetricLabel"] {
+        color: #64748B;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    div[data-testid="stMetricValue"] {
+        color: #0F172A;
+        font-weight: 700;
+    }
+
+    /* Buttons */
+    .stButton > button {
+        border-radius: 10px;
+        font-weight: 600;
+        border: 1px solid #CBD5E1;
+        padding: 0.55rem 1rem;
+    }
+
+    /* Primary buttons */
+    .stButton > button[kind="primary"] {
+        background-color: #2563EB;
+        color: white;
+        border: none;
+    }
+
+    /* Text input */
+    div[data-baseweb="input"] {
+        border-radius: 10px;
+    }
+
+    /* Dataframes/tables */
+    div[data-testid="stDataFrame"] {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
 # GEMINI CLIENT
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=GEMINI_API_KEY)
