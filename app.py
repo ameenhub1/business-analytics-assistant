@@ -673,27 +673,133 @@ with tab2:
 # TAB 3 - ANOMALY REPORT
 with tab3:
     st.subheader("Anomaly Detection Report")
+
     anomaly_count = len(analytics["anomalies"])
+
     st.error(f"{anomaly_count} anomalies detected in sales data")
 
-    st.table(analytics["anomalies"][["Year-Month", "Region", "Sales", "mean"]].rename(columns={"mean": "Expected Sales (Mean)"}).round(2))
+    # ANOMALY TABLE
+    anomaly_display = analytics["anomalies"][
+        ["Year-Month", "Region", "Sales", "mean"]
+    ].copy()
 
+    anomaly_display = anomaly_display.rename(
+        columns={"mean": "Expected Sales (Mean)"}
+    )
+
+    anomaly_display["Sales"] = anomaly_display["Sales"].map(
+        lambda x: f"₹{x:,.0f}"
+    )
+
+    anomaly_display["Expected Sales (Mean)"] = anomaly_display[
+        "Expected Sales (Mean)"
+    ].map(
+        lambda x: f"₹{x:,.0f}"
+    )
+
+    st.dataframe(
+        anomaly_display,
+        use_container_width=True,
+        hide_index=True
+    )
+
+    # ANOMALY CHART
     fig5 = px.scatter(
         analytics["monthly_region"],
-        x="Year-Month", y="Sales",
+        x="Year-Month",
+        y="Sales",
         color="Region",
-        title="Monthly Sales by Region (X = Anomaly)",
+        title="Monthly Sales by Region",
         size_max=12
     )
+
     anomaly_points = analytics["anomalies"]
-    fig5.add_trace(go.Scatter(
-        x=anomaly_points["Year-Month"],
-        y=anomaly_points["Sales"],
-        mode="markers",
-        marker=dict(color="red", size=16, symbol="x"),
-        name="Anomaly"
-    ))
-    fig5.update_layout(xaxis_tickangle=-45, plot_bgcolor="white", paper_bgcolor="white")
+
+    fig5.add_trace(
+        go.Scatter(
+            x=anomaly_points["Year-Month"],
+            y=anomaly_points["Sales"],
+            mode="markers",
+            marker=dict(
+                color="#DC2626",
+                size=16,
+                symbol="x"
+            ),
+            name="Anomaly"
+        )
+    )
+
+    fig5.update_layout(
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+
+        font=dict(
+            family="Arial",
+            color="#334155"
+        ),
+
+        title_font=dict(
+            size=18,
+            color="#0F172A"
+        ),
+
+        margin=dict(
+            l=70,
+            r=30,
+            t=60,
+            b=70
+        ),
+
+        xaxis=dict(
+            showgrid=False,
+            linecolor="#94A3B8",
+            tickangle=-45,
+
+            tickfont=dict(
+                color="#334155",
+                size=12
+            ),
+
+            title=dict(
+                text="Year-Month",
+                font=dict(
+                    color="#334155",
+                    size=13
+                )
+            )
+        ),
+
+        yaxis=dict(
+            gridcolor="#CBD5E1",
+            zeroline=False,
+
+            tickfont=dict(
+                color="#334155",
+                size=12
+            ),
+
+            title=dict(
+                text="Sales",
+                font=dict(
+                    color="#334155",
+                    size=13
+                )
+            )
+        ),
+
+        legend=dict(
+            font=dict(
+                color="#334155",
+                size=12
+            )
+        ),
+
+        hoverlabel=dict(
+            bgcolor="white",
+            font_color="#0F172A"
+        )
+    )
+
     st.plotly_chart(fig5, use_container_width=True)
 
 # TAB 4 - ASK YOUR DATA
