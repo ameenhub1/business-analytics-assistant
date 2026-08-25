@@ -110,6 +110,35 @@ st.markdown("""
         overflow: hidden;
     }
 
+    /* Hero Header */
+.hero-header {
+    background: linear-gradient(135deg, #0F172A, #1E3A8A);
+    padding: 28px 32px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+}
+
+.hero-label {
+    color: #93C5FD;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    color: white;
+    font-size: 32px;
+    font-weight: 750;
+    margin-top: 6px;
+}
+
+.hero-subtitle {
+    color: #CBD5E1;
+    font-size: 15px;
+    margin-top: 6px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -247,43 +276,18 @@ df = load_data()
 analytics = compute_analytics(df)
 
 # HEADER
-st.markdown("""
-<div style="
-    background: linear-gradient(135deg, #0F172A, #1E3A8A);
-    padding: 28px 32px;
-    border-radius: 18px;
-    margin-bottom: 24px;
-">
-
-    <div style="
-        color: #93C5FD;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-    ">
-        BUSINESS INTELLIGENCE
+st.markdown(
+    """
+    <div class="hero-header">
+        <div class="hero-label">BUSINESS INTELLIGENCE</div>
+        <div class="hero-title">📊 Business Analytics Assistant</div>
+        <div class="hero-subtitle">
+            AI-powered sales analysis, anomaly detection and business insights
+        </div>
     </div>
-
-    <div style="
-        color: white;
-        font-size: 32px;
-        font-weight: 750;
-        margin-top: 6px;
-    ">
-         Business Analytics Assistant
-    </div>
-
-    <div style="
-        color: #CBD5E1;
-        font-size: 15px;
-        margin-top: 6px;
-    ">
-        AI-powered sales analysis, anomaly detection and business insights
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
      
 
