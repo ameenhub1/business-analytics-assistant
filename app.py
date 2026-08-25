@@ -464,7 +464,7 @@ with tab2:
                 font_color="#0F172A"
             )
         )
-       st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, use_container_width=True)
     
        
 
