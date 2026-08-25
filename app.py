@@ -47,6 +47,7 @@ st.markdown("""
         color: #0F172A;
         font-weight: 650;
     }
+    
     /* Streamlit subheaders */
 div[data-testid="stSubheader"] {
     color: #0F172A !important;
@@ -55,6 +56,13 @@ div[data-testid="stSubheader"] {
 div[data-testid="stSubheader"] h2 {
     color: #0F172A !important;
     font-weight: 700 !important;
+}
+
+/* Force section heading text */
+.stSubheader,
+.stSubheader h2,
+.stSubheader h3 {
+    color: #0F172A !important;
 }
 
     /* Normal text */
