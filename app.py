@@ -203,6 +203,20 @@ div.questions-title {
     margin: 20px 0 14px 0;
 }
 
+/* Generate Business Insights button */
+div.stButton > button[kind="primary"] {
+    background-color: #7C3AED !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+}
+
+div.stButton > button[kind="primary"]:hover {
+    background-color: #6D28D9 !important;
+    color: white !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
