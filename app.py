@@ -815,19 +815,39 @@ with tab4:
         st.success("Insights Generated")
         st.markdown(insight)
 
-    st.divider()
-    st.markdown("**Or ask your own question:**")
-    question = st.text_input("Type your question here...",
-        placeholder="e.g. Why did sales decline in January 2024?")
+        st.divider()
+
+    question = st.text_input(
+        "Your question",
+        placeholder="e.g. Why did sales decline in January 2024?",
+        label_visibility="collapsed"
+    )
 
     if st.button("Ask", type="secondary") and question:
         with st.spinner("Thinking..."):
             answer = ask_ai(question, analytics)
-        st.markdown("**Answer:**")
-        st.markdown(answer)
+
+        st.markdown(
+            f"""
+            <div class="ai-answer">
+                <div class="ai-answer-title">Answer</div>
+                <div class="ai-answer-text">{answer}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
     st.divider()
-    st.markdown("**Try these questions:**")
+
+    st.markdown(
+        """
+        <div class="questions-title">
+            Try these questions
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     sample_questions = [
         "Which category generated the most revenue?",
         "Which region has the lowest profit margin?",
@@ -835,5 +855,18 @@ with tab4:
         "Which customer segment should we focus on?",
         "What should the business investigate urgently?"
     ]
-    for q in sample_questions:
-        st.markdown(f"- *{q}*")
+
+    for i, q in enumerate(sample_questions):
+        if st.button(q, key=f"sample_question_{i}"):
+            with st.spinner("Thinking..."):
+                answer = ask_ai(q, analytics)
+
+            st.markdown(
+                f"""
+                <div class="ai-answer">
+                    <div class="ai-answer-title">Answer</div>
+                    <div class="ai-answer-text">{answer}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
