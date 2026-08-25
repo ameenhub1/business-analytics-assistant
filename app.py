@@ -11,8 +11,8 @@ import random
 
 # PAGE CONFIG
 st.set_page_config(
-    page_title="Business Analytics Assistant",
-    page_icon="📊",
+    page_title="Business Analytics Assistant-BAA",
+    page_icon="",
     layout="wide"
 )
 
@@ -313,8 +313,27 @@ with tab1:
     st.divider()
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("Category Performance")
-        st.table(analytics["category_stats"].style.format({'Revenue': '₹{:,.0f}', 'Profit': '₹{:,.0f}', 'Margin %': '{:.1f}%'}))
+        st.subheader("📦 Category Performance")
+
+category_display = analytics["category_stats"].copy()
+
+category_display["Revenue"] = category_display["Revenue"].map(
+    lambda x: f"₹{x:,.0f}"
+)
+
+category_display["Profit"] = category_display["Profit"].map(
+    lambda x: f"₹{x:,.0f}"
+)
+
+category_display["Margin %"] = category_display["Margin %"].map(
+    lambda x: f"{x:.1f}%"
+)
+
+st.dataframe(
+    category_display,
+    use_container_width=True,
+    hide_index=True
+)
     with col2:
         st.subheader("Regional Performance")
         st.table(analytics["region_stats"].style.format({'Revenue': '₹{:,.0f}', 'Profit': '₹{:,.0f}', 'Margin %': '{:.1f}%'}))
