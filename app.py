@@ -433,7 +433,43 @@ with tab2:
             markers=True,
             color_discrete_sequence=["#2563EB"]
         )
-        fig1.update_layout(xaxis_tickangle=-45, plot_bgcolor="white", paper_bgcolor="white")
+       fig1.update_layout(
+    plot_bgcolor="white",
+    paper_bgcolor="white",
+
+    font=dict(
+        family="Arial",
+        color="#334155"
+    ),
+
+    title_font=dict(
+        size=18,
+        color="#0F172A"
+    ),
+
+    margin=dict(
+        l=20,
+        r=20,
+        t=60,
+        b=20
+    ),
+
+    xaxis=dict(
+        showgrid=False,
+        linecolor="#CBD5E1",
+        tickangle=-45
+    ),
+
+    yaxis=dict(
+        gridcolor="#E2E8F0",
+        zeroline=False
+    ),
+
+    hoverlabel=dict(
+        bgcolor="white",
+        font_color="#0F172A"
+    )
+)
         st.plotly_chart(fig1, use_container_width=True)
 
     with col2:
