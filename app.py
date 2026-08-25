@@ -247,16 +247,49 @@ df = load_data()
 analytics = compute_analytics(df)
 
 # HEADER
-st.title("📊 Business Analytics Assistant")
-st.markdown("*AI-powered sales analysis and business insights*")
-st.divider()
+st.markdown("""
+<div style="
+    background: linear-gradient(135deg, #0F172A, #1E3A8A);
+    padding: 28px 32px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+">
+    <div style="
+        color: #93C5FD;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    ">
+        BUSINESS INTELLIGENCE
+    </div>
+
+    <div style="
+        color: white;
+        font-size: 32px;
+        font-weight: 750;
+        margin-top: 6px;
+    ">
+        📊 Business Analytics Assistant
+    </div>
+
+    <div style="
+        color: #CBD5E1;
+        font-size: 15px;
+        margin-top: 6px;
+    ">
+        AI-powered sales analysis, anomaly detection and business insights
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 
 # TABS
 tab1, tab2, tab3, tab4 = st.tabs([
-    "🏠 Executive Overview",
-    "📈 Visual Analytics",
-    "⚠️ Anomaly Report",
-    "🤖 Ask Your Data"
+    "Executive Overview",
+    "Visual Analytics",
+    "Anomaly Report",
+    "AI ChatBot"
 ])
 
 # TAB 1 - EXECUTIVE OVERVIEW
