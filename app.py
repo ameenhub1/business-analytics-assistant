@@ -17,7 +17,7 @@ st.set_page_config(
 )
 
 # GEMINI CLIENT
-GEMINI_API_KEY = "AQ.Ab8RN6JS_diVPc_oxWmGrBzj2PZBMbIuMdgewULD9hcNqHCRqQ"
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 # GENERATE DATASET
