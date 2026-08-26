@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -228,6 +227,101 @@ div.stButton > button[kind="primary"]:hover {
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=GEMINI_API_KEY)
 
+# ─────────────────────────────────────────────
+# SMART COLUMN DETECTOR
+# ─────────────────────────────────────────────
+def detect_columns(df):
+    cols = {c.lower().strip(): c for c in df.columns}
+    mapping = {}
+
+    for key in ["order date", "date", "order_date", "transaction date", "sale date", "invoice date"]:
+        if key in cols:
+            mapping["date"] = cols[key]
+            break
+
+    for key in ["sales", "revenue", "amount", "total", "sale amount", "gross sales", "net sales"]:
+        if key in cols:
+            mapping["sales"] = cols[key]
+            break
+
+    for key in ["profit", "net profit", "margin", "net income", "earnings", "gross profit"]:
+        if key in cols:
+            mapping["profit"] = cols[key]
+            break
+
+    for key in ["region", "area", "zone", "territory", "location", "state"]:
+        if key in cols:
+            mapping["region"] = cols[key]
+            break
+
+    for key in ["category", "product category", "type", "department", "product type"]:
+        if key in cols:
+            mapping["category"] = cols[key]
+            break
+
+    for key in ["customer segment", "segment", "customer type", "client type"]:
+        if key in cols:
+            mapping["segment"] = cols[key]
+            break
+
+    for key in ["order id", "order_id", "id", "transaction id", "invoice", "invoice no"]:
+        if key in cols:
+            mapping["order_id"] = cols[key]
+            break
+
+    return mapping
+
+# ─────────────────────────────────────────────
+# PROCESS UPLOADED CSV
+# ─────────────────────────────────────────────
+def process_uploaded_data(df, mapping):
+    processed = pd.DataFrame()
+
+    if "date" in mapping:
+        try:
+            processed["Order Date"] = pd.to_datetime(df[mapping["date"]])
+        except:
+            processed["Order Date"] = pd.date_range("2022-01-01", periods=len(df), freq="D")
+    else:
+        processed["Order Date"] = pd.date_range("2022-01-01", periods=len(df), freq="D")
+
+    if "sales" in mapping:
+        processed["Sales"] = pd.to_numeric(df[mapping["sales"]], errors="coerce").fillna(0)
+    else:
+        processed["Sales"] = 0
+
+    if "profit" in mapping:
+        processed["Profit"] = pd.to_numeric(df[mapping["profit"]], errors="coerce").fillna(0)
+    else:
+        processed["Profit"] = (processed["Sales"] * 0.15).round(2)
+
+    if "region" in mapping:
+        processed["Region"] = df[mapping["region"]].astype(str).str.strip()
+    else:
+        processed["Region"] = "General"
+
+    if "category" in mapping:
+        processed["Category"] = df[mapping["category"]].astype(str).str.strip()
+    else:
+        processed["Category"] = "General"
+
+    if "segment" in mapping:
+        processed["Customer Segment"] = df[mapping["segment"]].astype(str).str.strip()
+    else:
+        processed["Customer Segment"] = "General"
+
+    if "order_id" in mapping:
+        processed["Order ID"] = df[mapping["order_id"]].astype(str)
+    else:
+        processed["Order ID"] = [f"ORD-{i}" for i in range(len(df))]
+
+    processed["Year"]       = processed["Order Date"].dt.year
+    processed["Month"]      = processed["Order Date"].dt.month
+    processed["Month Name"] = processed["Order Date"].dt.strftime("%b")
+    processed["Year-Month"] = processed["Order Date"].dt.strftime("%Y-%m")
+
+    return processed
+
 # GENERATE DATASET
 @st.cache_data
 def load_data():
@@ -353,19 +447,83 @@ Question: {question}
     )
     return response.text
 
-# LOAD DATA
-df = load_data()
+# ─────────────────────────────────────────────
+# SIDEBAR — CSV UPLOAD
+# ─────────────────────────────────────────────
+with st.sidebar:
+    st.markdown("### 📂 Upload Your Data")
+    st.markdown(
+        "<p style='color:#64748B; font-size:13px;'>Upload any sales CSV. Columns are auto-detected.</p>",
+        unsafe_allow_html=True
+    )
+
+    uploaded_file = st.file_uploader(
+        "Choose a CSV file",
+        type=["csv"],
+        label_visibility="collapsed"
+    )
+
+    st.divider()
+
+    st.markdown(
+        """
+        <p style='color:#64748B; font-size:12px; font-weight:600;'>SUPPORTED COLUMNS</p>
+        <p style='color:#94A3B8; font-size:12px; line-height:1.8;'>
+        • Date / Order Date<br>
+        • Sales / Revenue / Amount<br>
+        • Profit / Margin / Net Profit<br>
+        • Region / Area / Zone<br>
+        • Category / Type<br>
+        • Segment / Customer Type<br>
+        • Order ID (optional)
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.divider()
+    st.markdown(
+        "<p style='color:#64748B; font-size:11px; text-align:center;'>Built by Muhammed Ameen M P</p>",
+        unsafe_allow_html=True
+    )
+
+# ─────────────────────────────────────────────
+# LOAD & PROCESS DATA
+# ─────────────────────────────────────────────
+data_source = "demo"
+mapping = {}
+
+if uploaded_file is not None:
+    try:
+        raw_df   = pd.read_csv(uploaded_file)
+        mapping  = detect_columns(raw_df)
+        df       = process_uploaded_data(raw_df, mapping)
+        data_source = "uploaded"
+    except Exception as e:
+        st.warning(f"Could not read file: {e} — falling back to demo data.")
+        df = load_data()
+else:
+    df = load_data()
+
 analytics = compute_analytics(df)
 
+# ─────────────────────────────────────────────
 # HEADER
+# ─────────────────────────────────────────────
+if data_source == "uploaded":
+    subtitle = f"Analysing: <strong>{uploaded_file.name}</strong> — {len(df):,} rows loaded"
+    if mapping:
+        detected = ", ".join([f"{k} → {v}" for k, v in mapping.items()])
+        subtitle += f"<br><span style='font-size:12px; color:#93C5FD;'>Detected: {detected}</span>"
+else:
+    subtitle = "AI-powered sales analysis, anomaly detection and business insights — <em>using demo dataset</em>"
+
 st.markdown(
-    """
+    f"""
     <div class="hero-header">
         <div class="hero-label">BUSINESS INTELLIGENCE</div>
         <div class="hero-title">Business Analytics Assistant</div>
-        <div class="hero-subtitle">
-            AI-powered sales analysis, anomaly detection and business insights
-        </div>
+        <div class="hero-subtitle">{subtitle}</div>
     </div>
     """,
     unsafe_allow_html=True
